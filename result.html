@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title>Result</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="center">
+
+<div class="card">
+  <h2>🎉 Your Result</h2>
+  <p id="resultText"></p>
+  <button class="primary-btn" onclick="location.href='dashboard.html'">Back</button>
+  <button class="year-btn" onclick="showHistory()">View History</button>
+  <div id="historyBox"></div>
+</div>
+
+<script>
+let s=localStorage.getItem("score"), t=localStorage.getItem("total");
+document.getElementById("resultText").innerText=`Score: ${s}/${t}`;
+function showHistory(){
+ let h=JSON.parse(localStorage.getItem("history"))||[];
+ document.getElementById("historyBox").innerHTML=h.map(x=>`<p>${x.month}: ${x.score}/${x.total}</p>`).join("");
+}
+</script>
+
+</body>
+</html>

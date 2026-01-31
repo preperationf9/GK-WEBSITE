@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>History</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>Quiz History</header>
+    <div class="container" id="history"></div>
+
+    <script>
+      let history = JSON.parse(localStorage.getItem("history")) || [];
+      let html = "";
+
+      history.forEach((h) => {
+        html += `<p>${h.year} - ${h.month} : ${h.score}/${h.total}</p>`;
+      });
+
+      document.getElementById("history").innerHTML = html;
+    </script>
+  </body>
+</html>

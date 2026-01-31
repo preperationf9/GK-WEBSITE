@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>Objective Questions - Years</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>📚 Objective Questions - Select Year</header>
+
+<div class="section-grid">
+  <div class="section-card" onclick="openYear('2025')">
+    <h3>📅 2025</h3>
+  </div>
+</div>
+
+<button class="back-btn" onclick="location.href='dashboard.html'">⬅ Back</button>
+
+<script>
+function openYear(year){
+  localStorage.setItem("objectiveYear", year);
+  window.location.href = "objective_year.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="firebase.js"></script>
+</head>
+
+<body onload="checkLogin(); showName(); loadExamStats(); loadRewards(); loadChart();">
+
+<header>📚 Exam Preparation Hub</header>
+<h2 id="welcomeText">Welcome 👋</h2>
+
+<button class="perf-toggle" onclick="togglePerformance()">📊 Your Exam Performance</button>
+
+<div id="performancePanel" class="perf-panel">
+  <div id="examStats"></div>
+  <canvas id="scoreChart" height="120"></canvas>
+</div>
+
+<div id="userRewards"></div>
+
+<div class="section-grid">
+  <div class="section-card">
+    <h3>🧠 Quiz Section</h3>
+    <button onclick="startQuiz('jan2025')">Start Quiz</button>
+  </div>
+
+  <div class="section-card">
+    <h3>✅ Objective Questions</h3>
+    <button onclick="window.location.href='objective.html'">View Objective</button>
+  </div>
+
+  <div class="section-card">
+    <h3>📝 Long Questions</h3>
+    <button onclick="window.location.href='long.html'">View Long Q&A</button>
+  </div>
+
+  <div class="section-card">
+    <h3>🏆 Exams</h3>
+    <button onclick="window.location.href='exams.html'">Open Exams</button>
+  </div>
+</div>
+
+<button id="logoutBtn" onclick="logout()">Logout</button>
+
+<script>
+function startQuiz(month) {
+  localStorage.setItem("quizMonth", month);
+  localStorage.removeItem("examQuiz");
+  window.location.href = "quiz.html";
+}
+
+function showName() {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) document.getElementById("welcomeText").innerText = "Welcome, " + user.displayName + " 👋";
+  });
+}
+
+function togglePerformance() {
+  const panel = document.getElementById("performancePanel");
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
+
+function loadExamStats() {
+  let history = JSON.parse(localStorage.getItem("examHistory")) || [];
+  let box = document.getElementById("examStats");
+
+  if (history.length === 0) {
+    box.innerHTML = "<p>No exam attempts yet.</p>";
+    return;
+  }
+
+  let avg = Math.round(history.reduce((a,h)=>a+(h.score/h.total*100),0)/history.length);
+  box.innerHTML = `<h3>📊 Overall Average: ${avg}%</h3>`;
+}
+
+function loadRewards() {
+  let streak = parseInt(localStorage.getItem("streak")) || 1;
+  document.getElementById("userRewards").innerHTML =
+    `<h3>🔥 Daily Streak: ${streak} day(s)</h3>`;
+}
+
+function loadChart() {
+  let history = JSON.parse(localStorage.getItem("examHistory")) || [];
+  if (history.length === 0) return;
+
+  let ctx = document.getElementById("scoreChart").getContext("2d");
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: history.map((h, i) => "Attempt " + (i + 1)),
+      datasets: [{
+        label: "Score %",
+        data: history.map(h => Math.round((h.score / h.total) * 100)),
+        borderWidth: 3,
+        fill: false,
+        tension: 0.3
+      }]
+    }
+  });
+}
+</script>
+</body>
+</html>

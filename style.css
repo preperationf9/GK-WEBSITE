@@ -1,0 +1,266 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #eef2f7;
+  text-align: center;
+}
+
+header {
+  background: #1e88e5;
+  color: white;
+  padding: 15px;
+  font-size: 22px;
+}
+
+.center { display:flex; justify-content:center; align-items:center; height:100vh; }
+.card { background:white; padding:30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+
+.primary-btn {
+  padding:12px 20px;
+  border:none;
+  background:#1e88e5;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.section-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+.section-card {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+#questionBox {
+  background:#dfe6ee;
+  margin:20px auto;
+  padding:15px;
+  width:90%;
+  max-width:600px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.option-btn {
+  display:block;
+  margin:8px auto;
+  width:90%;
+  max-width:500px;
+  padding:12px;
+  border-radius:8px;
+  border:2px solid #ccc;
+  background:white;
+  cursor:pointer;
+}
+
+.correct { background:#c8e6c9 !important; }
+.wrong { background:#ffcdd2 !important; }
+
+#progressContainer {
+  width:90%;
+  max-width:600px;
+  height:10px;
+  background:#ccc;
+  margin:10px auto;
+  border-radius:10px;
+}
+
+#progressBar {
+  height:100%;
+  width:0%;
+  background:#4caf50;
+}
+
+/* Objective & Long Question Pages */
+.content-box {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.qa-box {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.answer {
+  color: #333;
+  padding-left: 10px;
+  border-left: 3px solid #1e88e5;
+}
+
+.back-btn {
+  margin: 20px;
+  padding: 10px 18px;
+  border: none;
+  background: #1e88e5;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== Exam Section Design ===== */
+
+.exam-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.exam-card {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  color: white;
+  padding: 20px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.exam-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== Exam Upgrade Design ===== */
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 700px;
+}
+
+.topic-card {
+  background: linear-gradient(135deg, #66bb6a, #43a047);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.topic-card:hover {
+  transform: scale(1.05);
+}
+
+.content-box {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+.qa-box {
+  background: #ffffff;
+  border-left: 5px solid #007bff;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.question {
+  font-weight: bold;
+  color: #222;
+}
+
+.answer {
+  margin-top: 5px;
+  color: #444;
+}
+
+.back-btn {
+  margin: 20px;
+  padding: 10px 20px;
+  background: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== PREMIUM CARD DESIGN ===== */
+.section-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Card buttons premium */
+.section-card button {
+  margin: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.section-card button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.perf-toggle {
+  margin: 15px auto;
+  padding: 10px 18px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #4caf50, #2196f3);
+  color: white;
+  transition: 0.3s;
+}
+
+.perf-toggle:hover {
+  transform: scale(1.05);
+}
+
+.perf-panel {
+  display: none;
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
