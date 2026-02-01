@@ -1,25 +1,22 @@
 <!doctype html>
 <html>
 <head>
-  <title>Quiz</title>
-  <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Quiz Year</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<header>🧠 Quiz Time</header>
+<header>📅 Select Year</header>
 
-<div class="quiz-top">
-  ⏱ <span id="timer">15</span>s | ⭐ Score: <span id="score">0</span>
+<div class="section-grid vertical">
+  <div class="section-card" onclick="selectYear('2025')">2025</div>
 </div>
 
-<div id="progressContainer"><div id="progressBar"></div></div>
-
-<div id="questionBox">
-  <div id="question">Loading...</div>
-</div>
-
-<div id="options"></div>
-
-<script src="script.js"></script>
+<script>
+function selectYear(year){
+  localStorage.setItem("quizYear", year);
+  location.href="quiz_month.html";
+}
+</script>
 </body>
 </html>

@@ -23,7 +23,6 @@ script.onload = () => {
 
 function loadQuestion() {
   const q = questions[current];
-
   document.getElementById("question").innerHTML =
     `<b>Question ${current + 1}/${questions.length}:</b><br>${q.question}`;
 
@@ -60,7 +59,6 @@ function checkAnswer(selected, btn) {
   clearInterval(timerInterval);
   const correct = questions[current].answer;
   const buttons = document.querySelectorAll(".option-btn");
-
   buttons.forEach(b => b.disabled = true);
 
   if (selected === correct) {
@@ -71,7 +69,6 @@ function checkAnswer(selected, btn) {
     btn.classList.add("wrong");
     buttons[correct].classList.add("correct");
   }
-
   setTimeout(nextQuestion, 900);
 }
 
@@ -81,8 +78,6 @@ function nextQuestion() {
     loadQuestion();
   } else {
     saveExamHistory();
-    localStorage.setItem("score", score);
-    localStorage.setItem("total", questions.length);
     window.location.href = "result.html";
   }
 }
@@ -101,4 +96,6 @@ function saveExamHistory() {
     date: new Date().toLocaleString()
   });
   localStorage.setItem("examHistory", JSON.stringify(history));
+  localStorage.setItem("score", score);
+  localStorage.setItem("total", questions.length);
 }
