@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Select Quiz Set</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header>🧠 Select Quiz Set</header>
+
+<div class="section-grid" id="sets"></div>
+
+<button class="back-btn" onclick="location.href='quiz_month.html'">⬅ Back</button>
+
+<script>
+let box = document.getElementById("sets");
+
+for(let i=1;i<=20;i++){
+  let div = document.createElement("div");
+  div.className="section-card";
+  div.innerHTML=`<h3>Set ${i}</h3>`;
+  div.onclick=()=>{
+    localStorage.setItem("quizSet", i);
+    location.href="quiz.html";
+  };
+  box.appendChild(div);
+}
+</script>
+
+</body>
+</html>

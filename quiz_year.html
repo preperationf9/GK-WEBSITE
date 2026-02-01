@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title>Select Quiz Year</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header>📅 Select Year</header>
+
+<div class="section-grid">
+  <div class="section-card" onclick="selectYear('2025')">
+    <h3>2025</h3>
+  </div>
+</div>
+
+<button class="back-btn" onclick="location.href='dashboard.html'">⬅ Back</button>
+
+<script>
+function selectYear(year){
+  localStorage.setItem("quizYear", year);
+  location.href = "quiz_month.html";
+}
+</script>
+
+</body>
+</html>
