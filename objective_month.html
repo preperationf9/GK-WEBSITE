@@ -1,37 +1,41 @@
 <!doctype html>
 <html>
-<head>
-  <title>Monthly Objective Questions</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <title>Monthly Objective Questions</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
 
-<header>📖 Monthly Objective Questions</header>
+    <div id="monthContainer"></div>
+<script src="script.js"></script>
+</body>
 
-<div class="content-box" id="questionsBox"></div>
+    <header>📖 Monthly Objective Questions</header>
+    <div class="content-box" id="questionsBox"></div>
 
-<button class="back-btn" onclick="location.href='objective_year.html'">⬅ Back</button>
+    <button class="back-btn" onclick="location.href = 'objective_year.html'">
+      ⬅ Back
+    </button>
 
-<script>
-const year = localStorage.getItem("objectiveYear");
-const month = localStorage.getItem("objectiveMonth");
+    <script>
+      const year = localStorage.getItem("objectiveYear");
+      const month = localStorage.getItem("objectiveMonth");
 
-let script = document.createElement("script");
-script.src = `data/objective/${year}/${month}.js`;
-document.body.appendChild(script);
+      let script = document.createElement("script");
+      script.src = `data/objective/${year}/${month}.js`;
+      document.body.appendChild(script);
 
-script.onload = () => {
-  const box = document.getElementById("questionsBox");
-  objectiveData.forEach((q,i)=>{
-    box.innerHTML += `
+      script.onload = () => {
+        const box = document.getElementById("questionsBox");
+        objectiveData.forEach((q, i) => {
+          box.innerHTML += `
       <div class="qa-box">
-        <div class="question">${i+1}. ${q.question}</div>
+        <div class="question">${i + 1}. ${q.question}</div>
         <div class="answer">Answer: ${q.answer}</div>
       </div>
     `;
-  });
-};
-</script>
-
-</body>
+        });
+      };
+    </script>
+  </body>
 </html>

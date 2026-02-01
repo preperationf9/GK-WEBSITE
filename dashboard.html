@@ -1,147 +1,172 @@
 <!doctype html>
 <html>
-<head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Chart JS -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="firebase.js"></script>
-</head>
+  <head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="firebase.js"></script>
+  </head>
 
-<body onload="checkLogin(); showName(); loadExamStats(); loadRewards(); loadChart();">
+  <body
+    onload="
+      checkLogin();
+      showName();
+      loadExamStats();
+      loadRewards();
+      loadChart();
+    "
+  >
+    <header>📚 Exam Preparation Hub</header>
+    <h2 id="welcomeText">Welcome 👋</h2>
+    <!-- 🔥 Daily Streak -->
+    <div id="userRewards"></div>
 
-<header>📚 Exam Preparation Hub</header>
-<h2 id="welcomeText">Welcome 👋</h2>
+    <!-- 📊 Performance Button -->
+    <button class="perf-toggle" onclick="togglePerformance()">
+      📊 Your Exam Performance
+    </button>
 
-<!-- 🔥 Daily Streak -->
-<div id="userRewards"></div>
-<!-- 📊 Performance Button -->
-<button class="perf-toggle" onclick="togglePerformance()">📊 Your Exam Performance</button>
+    <!-- 📊 Performance Panel -->
+    <div id="performancePanel" class="perf-panel">
+      <div id="examStats"></div>
+      <canvas id="scoreChart" height="120"></canvas>
+    </div>
 
-<!-- 📊 Performance Panel -->
-<div id="performancePanel" class="perf-panel">
-  <div id="examStats"></div>
-  <canvas id="scoreChart" height="120"></canvas>
-</div>
+    <!-- 📚 Main Sections -->
+    <div class="section-grid">
+      <div class="section-card">
+        <h3>🧠 Quiz Section</h3>
+        <button class="glow-btn" onclick="startQuiz('jan2025')">
+          <span class="corner-glow"></span>
 
-<!-- 📚 Main Sections -->
-<div class="section-grid">
-  <div class="section-card">
-    <h3>🧠 Quiz Section</h3>
-    <button onclick="startQuiz('jan2025')">Start Quiz</button>
-  </div>
+          Start Quiz
+        </button>
+      </div>
 
-  <div class="section-card">
-    <h3>✅ Objective Questions</h3>
-    <button onclick="window.location.href='objective.html'">View Objective</button>
-  </div>
+      <div class="section-card">
+        <h3>✅ Objective Questions</h3>
+        <button
+          class="glow-btn"
+          onclick="window.location.href = 'objective.html'"
+        >
+          View Objective
+        </button>
+      </div>
 
-  <div class="section-card">
-    <h3>📝 Long Questions</h3>
-    <button onclick="window.location.href='long.html'">View Long Q&A</button>
-  </div>
+      <div class="section-card">
+        <h3>📝 Long Questions</h3>
+        <button class="glow-btn" onclick="window.location.href = 'long.html'">
+          View Long Q&A
+        </button>
+      </div>
 
-  <div class="section-card">
-    <h3>🏆 Exams</h3>
-    <button onclick="window.location.href='exams.html'">Open Exams</button>
-  </div>
-</div>
+      <div class="section-card">
+        <h3>🏆 Exams</h3>
+        <button class="glow-btn" onclick="window.location.href = 'exams.html'">
+          Open Exams
+        </button>
+      </div>
+    </div>
 
-<button id="logoutBtn" onclick="logout()">Logout</button>
+    <button id="logoutBtn" onclick="logout()">Logout</button>
 
-<script>
-// 🎯 Start Quiz
-function startQuiz(month) {
-  localStorage.setItem("quizMonth", month);
-  localStorage.removeItem("examQuiz");
-  window.location.href = "quiz.html";
-}
+    <script>
+      function startQuiz(month) {
+        localStorage.setItem("quizMonth", month);
+        localStorage.removeItem("examQuiz");
+        window.location.href = "quiz.html";
+      }
 
-// 👤 Show User Name
-function showName() {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      document.getElementById("welcomeText").innerText =
-        "Welcome, " + user.displayName + " 👋";
-    }
-  });
-}
+      function showName() {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            document.getElementById("welcomeText").innerText =
+              "Welcome, " + user.displayName + " 👋";
+          }
+        });
+      }
 
-// 🔽 Toggle Performance Panel
-function togglePerformance() {
-  const panel = document.getElementById("performancePanel");
-  panel.style.display = panel.style.display === "block" ? "none" : "block";
-}
+      function togglePerformance() {
+        const panel = document.getElementById("performancePanel");
+        panel.style.display =
+          panel.style.display === "block" ? "none" : "block";
+      }
 
-// 📊 Load Exam Stats Summary
-function loadExamStats() {
-  let history = JSON.parse(localStorage.getItem("examHistory")) || [];
-  let box = document.getElementById("examStats");
+      function loadExamStats() {
+        let history = JSON.parse(localStorage.getItem("examHistory")) || [];
+        let box = document.getElementById("examStats");
 
-  if (history.length === 0) {
-    box.innerHTML = "<p>No exam attempts yet.</p>";
-    return;
-  }
+        if (history.length === 0) {
+          box.innerHTML = "<p>No exam attempts yet.</p>";
+          return;
+        }
 
-  let totalAttempts = history.length;
-  let totalScorePercent = history.reduce((sum, h) =>
-    sum + (h.score / h.total * 100), 0);
+        let totalAttempts = history.length;
+        let totalScorePercent = history.reduce(
+          (sum, h) => sum + (h.score / h.total) * 100,
+          0,
+        );
 
-  let avgScore = Math.round(totalScorePercent / totalAttempts);
+        let avgScore = Math.round(totalScorePercent / totalAttempts);
 
-  let highest = Math.max(...history.map(h => Math.round(h.score/h.total*100)));
-  let lowest = Math.min(...history.map(h => Math.round(h.score/h.total*100)));
+        let highest = Math.max(
+          ...history.map((h) => Math.round((h.score / h.total) * 100)),
+        );
+        let lowest = Math.min(
+          ...history.map((h) => Math.round((h.score / h.total) * 100)),
+        );
 
-  box.innerHTML = `
+        box.innerHTML = `
     <h3>📈 Performance Summary</h3>
     <p><b>Total Attempts:</b> ${totalAttempts}</p>
     <p><b>Average Score:</b> ${avgScore}%</p>
     <p><b>Highest Score:</b> ${highest}% 🏆</p>
     <p><b>Lowest Score:</b> ${lowest}%</p>
   `;
-}
-
-// 🔥 Daily Streak Counter
-function loadRewards() {
-  let streak = parseInt(localStorage.getItem("streak")) || 1;
-  document.getElementById("userRewards").innerHTML =
-    `<h3>🔥 Daily Streak: ${streak} day(s)</h3>`;
-}
-
-// 📈 Score Line Chart
-function loadChart() {
-  let history = JSON.parse(localStorage.getItem("examHistory")) || [];
-  if (history.length === 0) return;
-
-  let ctx = document.getElementById("scoreChart").getContext("2d");
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: history.map((h, i) => "Attempt " + (i + 1)),
-      datasets: [{
-        label: "Score %",
-        data: history.map(h => Math.round((h.score / h.total) * 100)),
-        borderWidth: 3,
-        tension: 0.3,
-        fill: false
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: true }
-      },
-      scales: {
-        y: { beginAtZero: true, max: 100 }
       }
-    }
-  });
-}
-</script>
 
-</body>
+      function loadRewards() {
+        let streak = parseInt(localStorage.getItem("streak")) || 1;
+        document.getElementById("userRewards").innerHTML =
+          `<h3>🔥 Daily Streak: ${streak} day(s)</h3>`;
+      }
+
+      function loadChart() {
+        let history = JSON.parse(localStorage.getItem("examHistory")) || [];
+        if (history.length === 0) return;
+
+        let ctx = document.getElementById("scoreChart").getContext("2d");
+
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: history.map((h, i) => "Attempt " + (i + 1)),
+            datasets: [
+              {
+                label: "Score %",
+                data: history.map((h) => Math.round((h.score / h.total) * 100)),
+                borderWidth: 3,
+                tension: 0.3,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: true },
+            },
+            scales: {
+              y: { beginAtZero: true, max: 100 },
+            },
+          },
+        });
+      }
+    </script>
+  </body>
 </html>

@@ -1,36 +1,50 @@
 <!doctype html>
 <html>
-<head>
-  <title>Select Month</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>📅 Select Month</header>
-
-<div class="section-grid" id="monthGrid"></div>
-
-<button class="back-btn" onclick="location.href='objective.html'">⬅ Back</button>
-
-<script>
-const year = localStorage.getItem("objectiveYear");
-const months = [
-  "January","February","March","April","May","June",
-  "July","August","September","October","November","December"
-];
-
-let grid = document.getElementById("monthGrid");
-
-months.forEach((m,i)=>{
-  let btn = document.createElement("div");
-  btn.className="section-card";
-  btn.innerHTML=`<h3>${m}</h3>`;
-  btn.onclick=()=>{
-    localStorage.setItem("objectiveMonth", m.toLowerCase());
-    window.location.href="objective_month.html";
-  };
-  grid.appendChild(btn);
-});
-</script>
+  <head>
+    <title>Select Month</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="yearContainer"></div>
+<script src="script.js"></script>
 </body>
+
+    <header>📅 Select Month</header>
+    <div class="section-grid" id="monthGrid"></div>
+
+    <button class="back-btn" onclick="location.href = 'objective.html'">
+      ⬅ Back
+    </button>
+
+    <script>
+      const year = localStorage.getItem("objectiveYear");
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      let grid = document.getElementById("monthGrid");
+
+      months.forEach((m, i) => {
+        let btn = document.createElement("div");
+        btn.className = "section-card";
+        btn.innerHTML = `<h3>${m}</h3>`;
+        btn.onclick = () => {
+          localStorage.setItem("objectiveMonth", m.toLowerCase());
+          window.location.href = "objective_month.html";
+        };
+        grid.appendChild(btn);
+      });
+    </script>
+  </body>
 </html>

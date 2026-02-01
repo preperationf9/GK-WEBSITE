@@ -325,3 +325,158 @@ header {
   padding: 8px;
   border-radius: 5px;
 }
+
+.quiz-btn {
+  background: linear-gradient(45deg, #4e73df, #1cc88a);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  margin: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.quiz-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.reset-btn {
+  background: #e74a3b;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.reset-btn:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* ===== CORNER ONLY MOVING NEON GLOW (BODY CLEAN) ===== */
+
+.section-card {
+  position: relative;
+  border-radius: 14px;
+  background: white;
+  z-index: 1;
+}
+
+/* Moving color source (hidden border driver) */
+.section-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #3434db,
+    #00ffcc,
+    #d8cc21,
+    #2a63d5,
+    #8800ff,
+    #00ffcc
+  );
+  background-size: 100% 100%;
+  animation: borderMove 8s linear infinite;
+  z-index: -3;
+
+  /* Only border visible */
+-webkit-mask:
+  linear-gradient(#000 0 0) content-box, 
+  linear-gradient(#000 0 0);
+-webkit-mask-composite: destination-out;
+mask:
+  linear-gradient(#000 0 0) content-box, 
+  linear-gradient(#000 0 0);
+mask-composite: exclude;
+}
+
+/* TOP-LEFT CORNER GLOW */
+.section-card::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: -40px;
+  left: -40px;
+  background: radial-gradient(circle at center,
+    rgba(255,0,200,0.8),
+    rgba(0,200,255,0.6),
+    transparent 70%);
+  filter: blur(35px);
+  animation: cornerMove1 6s linear infinite alternate;
+  z-index: -2;
+}
+
+/* BOTTOM-RIGHT CORNER GLOW */
+.section-card span.corner-glow {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  bottom: -40px;
+  right: -40px;
+  background: radial-gradient(circle at center,
+    rgba(255,200,0,0.8),
+    rgba(255,0,100,0.6),
+    transparent 70%);
+  filter: blur(95px);
+  animation: cornerMove2 7s linear infinite alternate;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Insert helper element automatically via CSS trick */
+.section-card::marker { content: none; }
+
+/* Animations */
+@keyframes borderMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes cornerMove1 {
+  from { transform: translate(0,0); }
+  to { transform: translate(10px,10px); }
+}
+
+@keyframes cornerMove2 {
+  from { transform: translate(0,0); }
+  to { transform: translate(-10px,-10px); }
+}
+
+/* ===== MOBILE RESPONSIVE FIX ===== */
+.container {
+  width: 95%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.section-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 16px;
+}
