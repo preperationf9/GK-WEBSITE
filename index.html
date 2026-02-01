@@ -9,12 +9,14 @@
   <script src="firebase.js"></script>
 </head>
 
+
 <body class="center">
   <div class="card">
     <h1>📘 GK & Current Affairs Hub</h1>
     <p>Login karo aur preparation start karo 🚀</p>
     <button class="primary-btn" onclick="login()">Login with Google</button>
   </div>
+
 
   <script>
     firebase.auth().onAuthStateChanged(user => {
