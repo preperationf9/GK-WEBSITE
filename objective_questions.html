@@ -11,13 +11,20 @@
 <header>📖 Objective Questions</header>
 <div class="content-box" id="questionsBox"></div>
 
-<button class="back-btn" onclick="location.href='quiz_sets.html'">⬅ Back</button>
+<!-- ✅ FIXED BACK BUTTON (Quiz nahi, Objective sets par jayega) -->
+<button class="back-btn" onclick="location.href='objective_sets.html'">⬅ Back</button>
 
 <script>
+// 🚫 IMPORTANT: Stop Quiz Mode from triggering
+localStorage.removeItem("quizSet");
+localStorage.removeItem("quizMonth");
+localStorage.removeItem("examQuiz");
+
 const year = localStorage.getItem("objectiveYear");
 const month = localStorage.getItem("objectiveMonth");
 const set = localStorage.getItem("objectiveSet");
 
+// LOAD OBJECTIVE SET FILE
 let script = document.createElement("script");
 script.src = `data/objective/${year}/${month}/set${set}.js`;
 document.body.appendChild(script);
@@ -36,6 +43,8 @@ script.onload = () => {
 };
 </script>
 
+<!-- Dark Mode Script -->
 <script src="darkmode.js"></script>
+
 </body>
 </html>

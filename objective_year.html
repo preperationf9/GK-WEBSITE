@@ -29,7 +29,7 @@ months.forEach(m=>{
   div.innerHTML = `<h3>${m.charAt(0).toUpperCase()+m.slice(1)}</h3>`;
   div.onclick = ()=>{
     localStorage.setItem("objectiveMonth", m);
-    location.href = "quiz_sets.html";
+    location.href = "objective_sets.html";
   };
   box.appendChild(div);
 });

@@ -1,34 +1,30 @@
 <!doctype html>
 <html>
 <head>
-  <title>Select Set</title>
+  <title>Select Objective Set</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
-
-<header>📚 Select Set</header>
+<header>📚 Select Objective Set</header>
 <div class="section-grid" id="setContainer"></div>
 
-<button class="back-btn" onclick="location.href='quiz.html'">⬅ Back</button>
+<button class="back-btn" onclick="location.href='objective_year.html'">⬅ Back</button>
 
 <script>
-const subject = localStorage.getItem("quizSubject");
 const container = document.getElementById("setContainer");
 
-for(let i=1; i<=50; i++){
+for(let i=1; i<=20; i++){
   let div = document.createElement("div");
   div.className = "section-card";
   div.innerHTML = `<h3>Set ${i}</h3>`;
   div.onclick = () => {
-    localStorage.setItem("quizSet", i);
-    location.href = "quiz_questions.html";
+    localStorage.setItem("objectiveSet", i);
+    location.href = "objective_questions.html"; // ✅ CORRECT PAGE
   };
   container.appendChild(div);
 }
 </script>
 
-<script src="darkmode.js"></script>
 </body>
 </html>
