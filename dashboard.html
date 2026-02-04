@@ -4,9 +4,7 @@
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
-    <!-- Chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="firebase.js"></script>
@@ -21,39 +19,35 @@
       loadChart();
     "
   >
+
+    <!-- 🌙 Dark Mode Button -->
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+
     <header>📚 Exam Preparation Hub</header>
     <h2 id="welcomeText">Welcome 👋</h2>
-    <!-- 🔥 Daily Streak -->
     <div id="userRewards"></div>
 
-    <!-- 📊 Performance Button -->
     <button class="perf-toggle" onclick="togglePerformance()">
       📊 Your Exam Performance
     </button>
 
-    <!-- 📊 Performance Panel -->
     <div id="performancePanel" class="perf-panel">
       <div id="examStats"></div>
       <canvas id="scoreChart" height="120"></canvas>
     </div>
 
-    <!-- 📚 Main Sections -->
     <div class="section-grid">
       <div class="section-card">
         <h3>🧠 Quiz Section</h3>
         <button class="glow-btn" onclick="startQuiz('jan2025')">
           <span class="corner-glow"></span>
-
           Start Quiz
         </button>
       </div>
 
       <div class="section-card">
         <h3>✅ Objective Questions</h3>
-        <button
-          class="glow-btn"
-          onclick="window.location.href = 'objective.html'"
-        >
+        <button class="glow-btn" onclick="window.location.href = 'objective.html'">
           View Objective
         </button>
       </div>
@@ -81,92 +75,14 @@
         localStorage.removeItem("examQuiz");
         window.location.href = "quiz.html";
       }
-
-      function showName() {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            document.getElementById("welcomeText").innerText =
-              "Welcome, " + user.displayName + " 👋";
-          }
-        });
-      }
-
-      function togglePerformance() {
-        const panel = document.getElementById("performancePanel");
-        panel.style.display =
-          panel.style.display === "block" ? "none" : "block";
-      }
-
-      function loadExamStats() {
-        let history = JSON.parse(localStorage.getItem("examHistory")) || [];
-        let box = document.getElementById("examStats");
-
-        if (history.length === 0) {
-          box.innerHTML = "<p>No exam attempts yet.</p>";
-          return;
-        }
-
-        let totalAttempts = history.length;
-        let totalScorePercent = history.reduce(
-          (sum, h) => sum + (h.score / h.total) * 100,
-          0,
-        );
-
-        let avgScore = Math.round(totalScorePercent / totalAttempts);
-
-        let highest = Math.max(
-          ...history.map((h) => Math.round((h.score / h.total) * 100)),
-        );
-        let lowest = Math.min(
-          ...history.map((h) => Math.round((h.score / h.total) * 100)),
-        );
-
-        box.innerHTML = `
-    <h3>📈 Performance Summary</h3>
-    <p><b>Total Attempts:</b> ${totalAttempts}</p>
-    <p><b>Average Score:</b> ${avgScore}%</p>
-    <p><b>Highest Score:</b> ${highest}% 🏆</p>
-    <p><b>Lowest Score:</b> ${lowest}%</p>
-  `;
-      }
-
-      function loadRewards() {
-        let streak = parseInt(localStorage.getItem("streak")) || 1;
-        document.getElementById("userRewards").innerHTML =
-          `<h3>🔥 Daily Streak: ${streak} day(s)</h3>`;
-      }
-
-      function loadChart() {
-        let history = JSON.parse(localStorage.getItem("examHistory")) || [];
-        if (history.length === 0) return;
-
-        let ctx = document.getElementById("scoreChart").getContext("2d");
-
-        new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: history.map((h, i) => "Attempt " + (i + 1)),
-            datasets: [
-              {
-                label: "Score %",
-                data: history.map((h) => Math.round((h.score / h.total) * 100)),
-                borderWidth: 3,
-                tension: 0.3,
-                fill: false,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { display: true },
-            },
-            scales: {
-              y: { beginAtZero: true, max: 100 },
-            },
-          },
-        });
-      }
+      function showName() { firebase.auth().onAuthStateChanged((user)=>{ if(user){ document.getElementById("welcomeText").innerText="Welcome, "+user.displayName+" 👋"; } }); }
+      function togglePerformance(){ const panel=document.getElementById("performancePanel"); panel.style.display=panel.style.display==="block"?"none":"block"; }
+      function loadExamStats(){ let history=JSON.parse(localStorage.getItem("examHistory"))||[]; let box=document.getElementById("examStats"); if(history.length===0){ box.innerHTML="<p>No exam attempts yet.</p>"; return;} let totalAttempts=history.length; let totalScorePercent=history.reduce((sum,h)=>sum+(h.score/h.total)*100,0); let avgScore=Math.round(totalScorePercent/totalAttempts); let highest=Math.max(...history.map(h=>Math.round((h.score/h.total)*100))); let lowest=Math.min(...history.map(h=>Math.round((h.score/h.total)*100))); box.innerHTML=`<h3>📈 Performance Summary</h3><p><b>Total Attempts:</b> ${totalAttempts}</p><p><b>Average Score:</b> ${avgScore}%</p><p><b>Highest Score:</b> ${highest}% 🏆</p><p><b>Lowest Score:</b> ${lowest}%</p>`;}
+      function loadRewards(){ let streak=parseInt(localStorage.getItem("streak"))||1; document.getElementById("userRewards").innerHTML=`<h3>🔥 Daily Streak: ${streak} day(s)</h3>`;}
+      function loadChart(){ let history=JSON.parse(localStorage.getItem("examHistory"))||[]; if(history.length===0)return; let ctx=document.getElementById("scoreChart").getContext("2d"); new Chart(ctx,{ type:"line", data:{ labels:history.map((h,i)=>"Attempt "+(i+1)), datasets:[{ label:"Score %", data:history.map(h=>Math.round((h.score/h.total)*100)), borderWidth:3, tension:0.3, fill:false }]}, options:{ responsive:true, plugins:{ legend:{display:true}}, scales:{ y:{beginAtZero:true,max:100}}}});}
     </script>
+
+    <!-- 🌙 Dark Mode Script -->
+    <script src="darkmode.js"></script>
   </body>
 </html>

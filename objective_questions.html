@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>Objective Questions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+
+<header>📖 Objective Questions</header>
+<div class="content-box" id="questionsBox"></div>
+
+<button class="back-btn" onclick="location.href='quiz_sets.html'">⬅ Back</button>
+
+<script>
+const year = localStorage.getItem("objectiveYear");
+const month = localStorage.getItem("objectiveMonth");
+const set = localStorage.getItem("objectiveSet");
+
+let script = document.createElement("script");
+script.src = `data/objective/${year}/${month}/set${set}.js`;
+document.body.appendChild(script);
+
+script.onload = () => {
+  const box = document.getElementById("questionsBox");
+
+  objectiveData.forEach((q, i) => {
+    box.innerHTML += `
+      <div class="qa-box">
+        <div class="question">${i + 1}. ${q.question}</div>
+        <div class="answer">Answer: ${q.options[q.answer]}</div>
+      </div>
+    `;
+  });
+};
+</script>
+
+<script src="darkmode.js"></script>
+</body>
+</html>

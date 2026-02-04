@@ -4,76 +4,20 @@
   <title>Exam Wise Preparation</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 <header>🎯 Exam Wise Preparation</header>
 
-<div class="exam-container">
-
-  <div class="exam-card" onclick="openExam('IB')">🕵️ IB</div>
-  <div class="exam-card" onclick="openExam('SSC')">📘 SSC</div>
-  <div class="exam-card" onclick="openExam('UPSC')">🏛 UPSC</div>
-  <div class="exam-card" onclick="openExam('NEET')">🧬 NEET</div>
-  <div class="exam-card" onclick="openExam('GK')">🌍 GK</div>
-  <div class="exam-card" onclick="openExam('CURRENT AFFAIRS')">📰 Current Affairs</div>
-
+<div class="section-grid">
+  <div class="section-card" onclick="startExam('ib')">IB</div>
+  <div class="section-card" onclick="startExam('ssc')">SSC</div>
 </div>
-
-<div id="examContent" class="content-box"></div>
 
 <button class="back-btn" onclick="location.href='dashboard.html'">⬅ Back</button>
 
 <script>
-function openExam(exam){
-  const box = document.getElementById("examContent");
-
-  box.innerHTML = `
-    <h2>${exam} Preparation</h2>
-
-    <div class="topic-grid">
-      <div class="topic-card" onclick="startExamQuiz('${exam}')">📝 Start ${exam} Quiz</div>
-      <div class="topic-card" onclick="showTopics('${exam}')">📚 View Topics</div>
-      <div class="topic-card" onclick="downloadNotes('${exam}')">📥 Download Notes PDF</div>
-    </div>
-
-    <div id="topicArea"></div>
-  `;
-}
-
-function showTopics(exam){
-  const topics = {
-    "IB": ["Reasoning", "GK", "Current Affairs"],
-    "SSC": ["Maths", "English", "Reasoning"],
-    "UPSC": ["Polity", "History", "Geography"],
-    "NEET": ["Biology", "Chemistry", "Physics"],
-    "GK": ["Static GK", "Sports", "Awards"],
-    "CURRENT AFFAIRS": ["National", "International", "Economy"]
-  };
-
-  let html = "<h3>Topics</h3>";
-  topics[exam].forEach(t => {
-    html += `<div class="qa-box"><div class="question">${t}</div><div class="answer">Important notes and questions from ${t}</div></div>`;
-  });
-
-  document.getElementById("topicArea").innerHTML = html;
-}
-
-function startExamQuiz(exam){
-  localStorage.setItem("examQuiz", exam);
-  window.location.href = "quiz.html";
-}
-
-function downloadNotes(exam){
-  const fileMap = {
-    "IB": "notes/ib_notes.pdf",
-    "SSC": "notes/ssc_notes.pdf",
-    "UPSC": "notes/upsc_notes.pdf"
-  };
-
-  const link = document.createElement("a");
-  link.href = fileMap[exam];
-  link.download = exam + "_notes.pdf";
-  link.click();
+function startExam(exam){
+  localStorage.setItem("quizMonth","exam_"+exam);
+  window.location.href="quiz.html";
 }
 </script>
 

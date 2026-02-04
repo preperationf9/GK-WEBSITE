@@ -1,27 +1,34 @@
 <!doctype html>
 <html>
-<head>
-  <title>Objective Questions - Years</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <title>Objective Questions</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- 🌙 Dark Mode Button -->
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
 
-<header>📚 Objective Questions - Select Year</header>
+    <header>📚 Objective Questions - Select Year</header>
 
-<div class="section-grid">
-  <div class="section-card" onclick="openYear('2025')">
-    <h3>📅 2025</h3>
-  </div>
-</div>
+    <div class="section-grid">
+      <div class="section-card" onclick="selectYear(2024)">📅 2024</div>
+      <div class="section-card" onclick="selectYear(2025)">📅 2025</div>
+      <div class="section-card" onclick="selectYear(2026)">📅 2026</div>
+    </div>
 
-<button class="back-btn" onclick="location.href='dashboard.html'">⬅ Back</button>
+    <button class="back-btn" onclick="location.href = 'dashboard.html'">
+      ⬅ Back
+    </button>
 
-<script>
-function openYear(year){
-  localStorage.setItem("objectiveYear", year);
-  window.location.href = "objective_year.html";
-}
-</script>
+    <script>
+      function selectYear(year) {
+        localStorage.setItem("objectiveYear", year);
+        location.href = "objective_year.html";
+      }
+    </script>
 
-</body>
+    <!-- 🌙 Global Dark Mode Script -->
+    <script src="darkmode.js"></script>
+  </body>
 </html>

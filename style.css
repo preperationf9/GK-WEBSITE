@@ -480,3 +480,99 @@ button {
   font-size: 16px;
   padding: 10px 16px;
 }
+
+.center-text{
+  text-align:center;
+  margin-top:10px;
+}
+
+.year-grid{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin:20px 0;
+  flex-wrap:wrap;
+}
+
+.year-btn{
+  padding:12px 22px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  background:#2b7cff;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.year-btn:hover{
+  background:#1a5edb;
+}
+
+.month-list{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.month-btn{
+  width:200px;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  background:#f1f1f1;
+  font-size:15px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.month-btn:hover{
+  background:#dbe8ff;
+}
+
+.month-btn{
+  width: 240px;
+  padding: 14px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.month-btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #e0ecff, #f4f8ff);
+}
+
+/* Click effect */
+.month-btn:active{
+  transform: scale(0.97);
+}
+
+/* 🌙 DARK MODE GLOBAL */
+body.dark-mode {
+  background: #0f172a;
+  color: #f1f5f9;
+}
+
+body.dark-mode .section-card,
+body.dark-mode .card,
+body.dark-mode .content-box,
+body.dark-mode .qa-box {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode button {
+  background: #334155;
+  color: white;
+}

@@ -3,54 +3,23 @@
 <head>
   <title>Result</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body class="center">
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
 
 <div class="card">
   <h2>🎉 Your Result</h2>
   <p id="resultText"></p>
-
-  <button class="primary-btn" onclick="location.href='dashboard.html'">Back</button>
-  <button class="year-btn" onclick="showHistory()">View History</button>
-
-  <!-- 🆕 RESET BUTTON -->
-  <button class="reset-btn" onclick="resetPerformance()">Reset Performance</button>
-
-  <div id="historyBox"></div>
+  <button onclick="location.href='dashboard.html'">Back</button>
 </div>
 
 <script>
 let s = localStorage.getItem("score"),
     t = localStorage.getItem("total");
-
 document.getElementById("resultText").innerText = `Score: ${s}/${t}`;
-
-// 🎊 Confetti if good score
-if (s && t && (s/t) >= 0.7) {
-  confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
-}
-
-// 📜 Show History
-function showHistory(){
-  let h = JSON.parse(localStorage.getItem("history")) || [];
-  document.getElementById("historyBox").innerHTML =
-    h.map(x => `<p>${x.month}: ${x.score}/${x.total}</p>`).join("");
-}
-
-// 🔄 RESET PERFORMANCE FUNCTION
-function resetPerformance() {
-  if (confirm("Are you sure you want to reset all performance data?")) {
-    localStorage.removeItem("score");
-    localStorage.removeItem("total");
-    localStorage.removeItem("history");
-
-    alert("Performance reset ho gaya! Ab aap naya quiz de sakte ho.");
-
-    location.reload();
-  }
-}
 </script>
 
+<script src="darkmode.js"></script>
 </body>
 </html>

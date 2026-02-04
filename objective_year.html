@@ -1,50 +1,40 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Select Month</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="yearContainer"></div>
-<script src="script.js"></script>
+<head>
+  <title>Select Month</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+
+<header>📅 Select Month</header>
+<h3 id="yearTitle"></h3>
+
+<div class="section-grid" id="months"></div>
+
+<button class="back-btn" onclick="location.href='objective.html'">⬅ Back</button>
+
+<script>
+const year = localStorage.getItem("objectiveYear");
+document.getElementById("yearTitle").innerText = "Year: " + year;
+
+const months = ["january","february","march","april","may","june","july","august","september","october","november","december"];
+let box = document.getElementById("months");
+
+months.forEach(m=>{
+  let div = document.createElement("div");
+  div.className = "section-card";
+  div.innerHTML = `<h3>${m.charAt(0).toUpperCase()+m.slice(1)}</h3>`;
+  div.onclick = ()=>{
+    localStorage.setItem("objectiveMonth", m);
+    location.href = "quiz_sets.html";
+  };
+  box.appendChild(div);
+});
+</script>
+
+<script src="darkmode.js"></script>
 </body>
-
-    <header>📅 Select Month</header>
-    <div class="section-grid" id="monthGrid"></div>
-
-    <button class="back-btn" onclick="location.href = 'objective.html'">
-      ⬅ Back
-    </button>
-
-    <script>
-      const year = localStorage.getItem("objectiveYear");
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-
-      let grid = document.getElementById("monthGrid");
-
-      months.forEach((m, i) => {
-        let btn = document.createElement("div");
-        btn.className = "section-card";
-        btn.innerHTML = `<h3>${m}</h3>`;
-        btn.onclick = () => {
-          localStorage.setItem("objectiveMonth", m.toLowerCase());
-          window.location.href = "objective_month.html";
-        };
-        grid.appendChild(btn);
-      });
-    </script>
-  </body>
 </html>
