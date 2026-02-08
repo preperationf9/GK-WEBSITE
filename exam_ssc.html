@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+  <title>SSC Exam Preparation</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+
+    .folder-card {
+      background: rgba(255,255,255,0.05);
+      padding: 18px;
+      border-radius: 14px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    .folder-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .folder-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .folder-meta {
+      font-size: 13px;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #2c2c2c;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg,#4facfe,#00f2fe);
+    }
+
+    .open-btn {
+      background: linear-gradient(90deg,#ff9966,#ff5e62);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    h2 { text-align:center; margin-top:20px; }
+  </style>
+</head>
+<body>
+
+<header>🏆 SSC Exam Preparation</header>
+
+<div class="section-grid">
+  <div class="section-card" onclick="openExam('CGL')">CGL</div>
+  <div class="section-card" onclick="openExam('CHSL')">CHSL</div>
+  <div class="section-card" onclick="openExam('MTS')">MTS</div>
+  <div class="section-card" onclick="openExam('GD')">GD</div>
+  <div class="section-card" onclick="openExam('CPO')">CPO</div>
+</div>
+
+<div id="examContent" class="folder-grid"></div>
+
+<button class="back-btn" onclick="location.href='exams.html'">⬅ Back</button>
+
+<script>
+function openExam(examName) {
+  const box = document.getElementById("examContent");
+
+  box.innerHTML = `
+    <h2>${examName} Preparation Hub</h2>
+
+    ${card("📅 Daily Quizzes", "Topic-wise small tests", 40)}
+    ${card("📚 Subject-wise Notes", "GS • Quant • English", 65)}
+    ${card("📝 Previous Year Papers", "Solved PYQs", 50)}
+    ${card("🏆 Mock Tests", "Full Length Practice", 25)}
+    ${card("💡 Strategy & Syllabus", "Exam Guide PDF", 90)}
+    ${card("🔥 Current Affairs", "Monthly Capsules", 30)}
+    ${card("🗣️ Vocabulary / Idioms", "Daily 10 Words", 20)}
+    ${card("📊 Performance Graph", "Your Test Analytics", 75)}
+  `;
+}
+
+function card(title, meta, progress) {
+  return `
+    <div class="folder-card">
+      <div class="folder-title">${title}</div>
+      <div class="folder-meta">${meta}</div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${progress}%"></div>
+      </div>
+      <button class="open-btn">Open</button>
+    </div>
+  `;
+}
+</script>
+
+<script src="darkmode.js"></script>
+</body>
+</html>
