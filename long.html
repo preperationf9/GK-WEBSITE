@@ -17,33 +17,20 @@
 
 <script>
 
+let currentLevel = "year";
+let selectedYear = "";
+
 const content = document.getElementById("contentArea");
 
-let currentLevel = "year"; // year → month → question
-let selectedYear = "";
-let selectedMonth = "";
-
-
-// ------------------ SHOW YEARS ------------------
 function showYears(){
   currentLevel = "year";
   content.innerHTML = `
-    ${yearCard(2024)}
-    ${yearCard(2025)}
-    ${yearCard(2026)}
+    <div class="section-card" onclick="showMonths(2024)">🗓️ 2024</div>
+    <div class="section-card" onclick="showMonths(2025)">🗓️ 2025</div>
+    <div class="section-card" onclick="showMonths(2026)">🗓️ 2026</div>
   `;
 }
 
-function yearCard(year){
-  return `
-    <div class="section-card" onclick="showMonths(${year})">
-      🗓️ ${year}
-    </div>
-  `;
-}
-
-
-// ------------------ SHOW MONTHS ------------------
 function showMonths(year){
   currentLevel = "month";
   selectedYear = year;
@@ -56,39 +43,29 @@ function showMonths(year){
   ).join("");
 }
 
-
-// ------------------ SHOW QUESTIONS ------------------
 function showQuestions(month){
   currentLevel = "question";
-  selectedMonth = month;
 
   content.innerHTML = `
-    <h2>${month} ${selectedYear} Long Questions</h2>
-
-    ${questionBox("Explain India’s foreign policy developments.")}
-    ${questionBox("Discuss India-Maldives diplomatic relations.")}
-    ${questionBox("Explain impact of AI in competitive exams.")}
-    ${questionBox("Describe India’s economic reforms.")}
-    ${questionBox("Explain Cyber Security challenges in India.")}
+    <h2>${month} ${selectedYear}</h2>
+    ${qa("Explain India’s foreign policy developments.")}
+    ${qa("Discuss India-Maldives relations.")}
+    ${qa("Impact of AI in competitive exams.")}
+    ${qa("India economic reforms overview.")}
+    ${qa("Cyber Security challenges in India.")}
   `;
 }
 
-function questionBox(q){
+function qa(q){
   return `
     <div class="qa-box">
       <div class="question">${q}</div>
-      <div class="answer">
-        This is a demo answer to test the button functionality.
-        You can replace it with your real long answer content.
-      </div>
+      <div class="answer">Demo answer for testing purpose.</div>
     </div>
   `;
 }
 
-
-// ------------------ BACK BUTTON LOGIC ------------------
 function handleBack(){
-
   if(currentLevel === "question"){
     showMonths(selectedYear);
   }
@@ -98,16 +75,12 @@ function handleBack(){
   else{
     window.location.href = "dashboard.html";
   }
-
 }
 
-
-// INITIAL LOAD
 showYears();
 
 </script>
 
 <script src="darkmode.js"></script>
-
 </body>
 </html>

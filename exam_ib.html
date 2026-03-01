@@ -18,59 +18,146 @@
 
 <div id="examContent" class="section-grid"></div>
 
-<button class="back-btn" onclick="location.href='exams.html'">⬅ Back</button>
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
 
 <script>
 
-function openExam(examName){
+let level = "exam";
+
+function openExam(name){
+  level = "hub";
   const box = document.getElementById("examContent");
 
   box.innerHTML = `
-    <h2>${examName} Preparation Hub</h2>
+    <h2>${name} Preparation Hub</h2>
 
-    ${card("📅 Daily Quizzes")}
-    ${card("📚 Subject-wise Notes")}
-    ${card("📝 Previous Year Papers")}
-    ${card("🏆 Mock Tests")}
-    ${card("💡 Strategy & Syllabus")}
-    ${card("🔥 Current Affairs")}
-    ${card("🗣️ Vocabulary / Idioms")}
-    ${card("📊 Performance Graph")}
+    ${card("daily","📅 Daily Quizzes")}
+    ${card("notes","📚 Subject-wise Notes")}
+    ${card("pyq","📝 Previous Year Papers")}
+    ${card("mock","🏆 Mock Tests")}
+    ${card("strategy","💡 Strategy & Syllabus")}
+    ${card("ca","🔥 Current Affairs")}
+    ${card("vocab","🗣️ Vocabulary / Idioms")}
+    ${card("performance","📊 Performance Graph")}
   `;
 }
 
-function card(title){
+function card(type,title){
   return `
     <div class="section-card">
       <h3>${title}</h3>
-      <button class="glow-btn" onclick="openContent('${title}')">Open</button>
+      <button class="glow-btn" onclick="openContent('${type}')">Open</button>
     </div>
   `;
 }
 
-function openContent(title){
+function openContent(type){
+  level = "content";
   const box = document.getElementById("examContent");
 
-  box.innerHTML = `
-    <h2>${title}</h2>
+  if(type==="daily"){
+    box.innerHTML = `
+      <h2>📅 Daily Quiz</h2>
+      ${qa("What is IB?")}
+      ${qa("Full form of ACIO?")}
+      ${qa("IB established in which year?")}
+      ${qa("IB works under which ministry?")}
+      ${qa("IB HQ located where?")}
+    `;
+  }
 
-    ${demoQ("What is Intelligence Bureau?")}
-    ${demoQ("Explain IB ACIO syllabus.")}
-    ${demoQ("What is the role of ACIO officer?")}
-    ${demoQ("Explain Security Assistant duties.")}
-    ${demoQ("Describe IB exam pattern.")}
-  `;
+  else if(type==="notes"){
+    box.innerHTML = `
+      <h2>📚 Notes</h2>
+      <ul>
+        <li>Reasoning Notes</li>
+        <li>GS Notes</li>
+        <li>English Grammar</li>
+        <li>Polity Short Notes</li>
+        <li>History Summary</li>
+      </ul>
+    `;
+  }
+
+  else if(type==="pyq"){
+    box.innerHTML = `
+      <h2>📝 Previous Year Questions</h2>
+      ${qa("ACIO 2023 Question")}
+      ${qa("ACIO 2022 Question")}
+      ${qa("ACIO 2021 Question")}
+      ${qa("ACIO 2020 Question")}
+      ${qa("ACIO 2019 Question")}
+    `;
+  }
+
+  else if(type==="mock"){
+    box.innerHTML = `
+      <h2>🏆 Mock Test</h2>
+      <button class="glow-btn">Start Full Length Mock</button>
+    `;
+  }
+
+  else if(type==="strategy"){
+    box.innerHTML = `
+      <h2>💡 Strategy</h2>
+      <p>100 Questions | 60 Minutes</p>
+      <p>Focus on Reasoning & GS</p>
+      <p>Revise PYQs regularly</p>
+      <p>Practice weekly mocks</p>
+    `;
+  }
+
+  else if(type==="ca"){
+    box.innerHTML = `
+      <h2>🔥 Current Affairs</h2>
+      ${qa("Recent India-Maldives update?")}
+      ${qa("Latest defense exercise?")}
+      ${qa("New cyber policy?")}
+      ${qa("Important 2026 event?")}
+      ${qa("New IB appointment?")}
+    `;
+  }
+
+  else if(type==="vocab"){
+    box.innerHTML = `
+      <h2>🗣️ Vocabulary</h2>
+      <p><b>Covert</b> – Secret</p>
+      <p><b>Meticulous</b> – Very careful</p>
+      <p><b>Surveillance</b> – Monitoring</p>
+      <p><b>Intelligence</b> – Information gathering</p>
+      <p><b>Diplomacy</b> – Managing relations</p>
+    `;
+  }
+
+  else if(type==="performance"){
+    box.innerHTML = `
+      <h2>📊 Performance Analytics</h2>
+      <p>Total Attempts: 5</p>
+      <p>Average Score: 72%</p>
+      <p>Highest Score: 88%</p>
+      <p>Lowest Score: 60%</p>
+      <p>Trend: 📈 Improving</p>
+    `;
+  }
 }
 
-function demoQ(q){
+function qa(q){
   return `
     <div class="qa-box">
       <div class="question">${q}</div>
-      <div class="answer">
-        This is a demo answer to test open button functionality.
-      </div>
+      <div class="answer">Demo answer for testing.</div>
     </div>
   `;
+}
+
+function goBack(){
+  if(level==="content"){
+    document.getElementById("examContent").innerHTML="";
+    level="hub";
+  }
+  else{
+    window.location.href="exams.html";
+  }
 }
 
 </script>
