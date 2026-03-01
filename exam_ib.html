@@ -3,67 +3,10 @@
 <head>
   <title>IB Exam Preparation</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .folder-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 18px;
-      max-width: 1000px;
-      margin: 20px auto;
-    }
-
-    .folder-card {
-      background: rgba(255,255,255,0.05);
-      padding: 18px;
-      border-radius: 14px;
-      transition: 0.3s ease;
-      box-shadow: 0 0 0 transparent;
-    }
-
-    .folder-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    }
-
-    .folder-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .folder-meta {
-      font-size: 13px;
-      opacity: 0.85;
-      margin-bottom: 10px;
-    }
-
-    .progress-bar {
-      height: 10px;
-      background: #2c2c2c;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg,#43e97b,#38f9d7);
-    }
-
-    .open-btn {
-      background: linear-gradient(90deg,#36d1dc,#5b86e5);
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      color: white;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    h2 { text-align:center; margin-top:20px; }
-  </style>
 </head>
 <body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
 
 <header>🕵️ IB Exam Preparation</header>
 
@@ -73,40 +16,63 @@
   <div class="section-card" onclick="openExam('Security Assistant')">Security Assistant</div>
 </div>
 
-<div id="examContent" class="folder-grid"></div>
+<div id="examContent" class="section-grid"></div>
 
 <button class="back-btn" onclick="location.href='exams.html'">⬅ Back</button>
 
 <script>
-function openExam(examName) {
+
+function openExam(examName){
   const box = document.getElementById("examContent");
 
   box.innerHTML = `
     <h2>${examName} Preparation Hub</h2>
 
-    ${card("📅 Daily Quizzes", "Topic-wise short tests", 35)}
-    ${card("📚 Subject-wise Notes", "Reasoning • GS • English", 60)}
-    ${card("📝 Previous Year Papers", "Solved IB PYQs", 45)}
-    ${card("🏆 Mock Tests", "Full Length Practice Sets", 25)}
-    ${card("💡 Strategy & Syllabus", "Exam Pattern & Tips", 85)}
-    ${card("🔥 Current Affairs", "Monthly Intelligence Updates", 40)}
-    ${card("🗣️ Vocabulary / Idioms", "Daily English Practice", 20)}
-    ${card("📊 Performance Graph", "Your Attempt Analytics", 70)}
+    ${card("📅 Daily Quizzes")}
+    ${card("📚 Subject-wise Notes")}
+    ${card("📝 Previous Year Papers")}
+    ${card("🏆 Mock Tests")}
+    ${card("💡 Strategy & Syllabus")}
+    ${card("🔥 Current Affairs")}
+    ${card("🗣️ Vocabulary / Idioms")}
+    ${card("📊 Performance Graph")}
   `;
 }
 
-function card(title, meta, progress) {
+function card(title){
   return `
-    <div class="folder-card">
-      <div class="folder-title">${title}</div>
-      <div class="folder-meta">${meta}</div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width:${progress}%"></div>
-      </div>
-      <button class="open-btn">Open</button>
+    <div class="section-card">
+      <h3>${title}</h3>
+      <button class="glow-btn" onclick="openContent('${title}')">Open</button>
     </div>
   `;
 }
+
+function openContent(title){
+  const box = document.getElementById("examContent");
+
+  box.innerHTML = `
+    <h2>${title}</h2>
+
+    ${demoQ("What is Intelligence Bureau?")}
+    ${demoQ("Explain IB ACIO syllabus.")}
+    ${demoQ("What is the role of ACIO officer?")}
+    ${demoQ("Explain Security Assistant duties.")}
+    ${demoQ("Describe IB exam pattern.")}
+  `;
+}
+
+function demoQ(q){
+  return `
+    <div class="qa-box">
+      <div class="question">${q}</div>
+      <div class="answer">
+        This is a demo answer to test open button functionality.
+      </div>
+    </div>
+  `;
+}
+
 </script>
 
 <script src="darkmode.js"></script>

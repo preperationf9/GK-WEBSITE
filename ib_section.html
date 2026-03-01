@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <title>IB Section</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>📘 IB Study Content</header>
+<div id="contentArea" class="section-grid"></div>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+<script>
+const section = localStorage.getItem("ib_section");
+const contentArea = document.getElementById("contentArea");
+
+if(section === "daily_quiz"){
+  contentArea.innerHTML = `
+    ${quizCard("Reasoning Mini Test","10 Questions")}
+    ${quizCard("GS Rapid Fire","15 Questions")}
+  `;
+}
+
+if(section === "notes"){
+  contentArea.innerHTML = `
+    ${pdfCard("Indian Polity Notes","notes/polity.pdf")}
+    ${pdfCard("Intelligence Agencies","notes/ib_agencies.pdf")}
+  `;
+}
+
+if(section === "pyq"){
+  contentArea.innerHTML = `
+    ${pdfCard("IB ACIO 2023 Paper","notes/acio_2023.pdf")}
+  `;
+}
+
+function quizCard(title,meta){
+  return `
+    <div class="folder-card">
+      <div class="folder-title">📝 ${title}</div>
+      <div class="folder-meta">${meta}</div>
+      <button class="open-btn" onclick="location.href='quiz.html'">Start Quiz</button>
+    </div>
+  `;
+}
+
+function pdfCard(title,link){
+  return `
+    <div class="folder-card">
+      <div class="folder-title">📄 ${title}</div>
+      <div class="folder-meta">PDF Study Material</div>
+      <button class="open-btn" onclick="window.open('${link}')">Open PDF</button>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>

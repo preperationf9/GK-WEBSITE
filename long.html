@@ -4,21 +4,79 @@
   <title>Long Questions</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+
 <header>📝 Long Answer Questions</header>
 
-<div class="content-box">
+<div id="contentArea" class="section-grid"></div>
 
-  <div class="qa-box">
-    <div class="question">Explain why Mohamed Muizzu was invited as Chief Guest in 2025 Republic Day?</div>
-    <div class="answer">
-      Bharat aur Maldives ke beech sambandh sudharne aur strategic cooperation badhane ke liye unhe mukhya atithi banaya gaya tha.
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<script>
+
+const content = document.getElementById("contentArea");
+
+function showYears(){
+  content.innerHTML = `
+    ${yearCard(2024)}
+    ${yearCard(2025)}
+    ${yearCard(2026)}
+  `;
+}
+
+function yearCard(year){
+  return `<div class="section-card" onclick="showMonths(${year})">
+            🗓️ ${year}
+          </div>`;
+}
+
+function showMonths(year){
+  localStorage.setItem("longYear",year);
+
+  const months = ["January","February","March","April","May","June",
+                  "July","August","September","October","November","December"];
+
+  content.innerHTML = months.map(m =>
+    `<div class="section-card" onclick="showQuestions('${m}')">${m}</div>`
+  ).join("");
+}
+
+function showQuestions(month){
+  const year = localStorage.getItem("longYear");
+
+  content.innerHTML = `
+    <h2>${month} ${year} Long Questions</h2>
+
+    ${questionBox("Explain the importance of India’s foreign policy in 2024?")}
+    ${questionBox("Discuss India-Maldives relations in detail.")}
+    ${questionBox("Explain Artificial Intelligence impact on exams.")}
+    ${questionBox("Describe India’s economic growth after 2023.")}
+    ${questionBox("Explain Cyber Security challenges in India.")}
+  `;
+}
+
+function questionBox(q){
+  return `
+    <div class="qa-box">
+      <div class="question">${q}</div>
+      <div class="answer">
+        This is a demo answer for testing button functionality. 
+        You can replace this with real long answer content.
+      </div>
     </div>
-  </div>
+  `;
+}
 
-</div>
+function goBack(){
+  showYears();
+}
 
-<button class="back-btn" onclick="location.href='dashboard.html'">⬅ Back</button>
+showYears();
+
+</script>
+
+<script src="darkmode.js"></script>
 </body>
 </html>

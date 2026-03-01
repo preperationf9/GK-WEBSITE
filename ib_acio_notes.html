@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <title>ACIO Notes</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .pdf-btn {
+      margin-top: 8px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .pdf-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+
+  <script>
+    function openPDF(path) {
+      fetch(path)
+        .then(res => {
+          if (res.ok) {
+            window.open(path, '_blank');
+          } else {
+            alert("PDF file not found. Check file name or folder.");
+          }
+        })
+        .catch(() => alert("Error opening file."));
+    }
+  </script>
+</head>
+
+<body>
+
+<header>📘 ACIO Notes Library</header>
+
+<div class="section-grid">
+
+  <!-- 📘 Passage to India -->
+  <div class="section-card">
+    <h3>📘 A Passage to India</h3>
+    <p>Important Literature Notes</p>
+    <button class="pdf-btn" onclick="openPDF('notes/ib_acio/passage_to_india.pdf')">
+      📖 Open PDF
+    </button>
+  </div>
+
+  <!-- 🏛️ Polity -->
+  <div class="section-card">
+    <h3>🏛️ Polity Notes</h3>
+    <p>ACIO Polity Concepts</p>
+    <button class="pdf-btn" onclick="openPDF('notes/ib_acio/ib_acio_polity.pdf')">
+      📖 Open PDF
+    </button>
+  </div>
+
+  <!-- 🧠 Reasoning -->
+  <div class="section-card">
+    <h3>🧠 Reasoning Short Tricks</h3>
+    <p>Fast Solving Methods</p>
+    <button class="pdf-btn" onclick="openPDF('notes/ib_acio/acio_reasoning.pdf')">
+      📖 Open PDF
+    </button>
+  </div>
+
+  <!-- 🌍 General Studies -->
+  <div class="section-card">
+    <h3>🌍 General Studies</h3>
+    <p>Quick Revision Notes</p>
+    <button class="pdf-btn" onclick="openPDF('notes/ib_acio/acio_gs_short_notes.pdf')">
+      📖 Open PDF
+    </button>
+  </div>
+
+</div>
+
+<button class="back-btn" onclick="location.href='exam_ib.html'">⬅ Back</button>
+
+<script src="darkmode.js"></script>
+
+</body>
+</html>
