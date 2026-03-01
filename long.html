@@ -4,6 +4,7 @@
   <title>Long Questions</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
@@ -12,13 +13,20 @@
 
 <div id="contentArea" class="section-grid"></div>
 
-<button class="back-btn" onclick="goBack()">⬅ Back</button>
+<button class="back-btn" onclick="handleBack()">⬅ Back</button>
 
 <script>
 
 const content = document.getElementById("contentArea");
 
+let currentLevel = "year"; // year → month → question
+let selectedYear = "";
+let selectedMonth = "";
+
+
+// ------------------ SHOW YEARS ------------------
 function showYears(){
+  currentLevel = "year";
   content.innerHTML = `
     ${yearCard(2024)}
     ${yearCard(2025)}
@@ -27,13 +35,18 @@ function showYears(){
 }
 
 function yearCard(year){
-  return `<div class="section-card" onclick="showMonths(${year})">
-            🗓️ ${year}
-          </div>`;
+  return `
+    <div class="section-card" onclick="showMonths(${year})">
+      🗓️ ${year}
+    </div>
+  `;
 }
 
+
+// ------------------ SHOW MONTHS ------------------
 function showMonths(year){
-  localStorage.setItem("longYear",year);
+  currentLevel = "month";
+  selectedYear = year;
 
   const months = ["January","February","March","April","May","June",
                   "July","August","September","October","November","December"];
@@ -43,16 +56,19 @@ function showMonths(year){
   ).join("");
 }
 
+
+// ------------------ SHOW QUESTIONS ------------------
 function showQuestions(month){
-  const year = localStorage.getItem("longYear");
+  currentLevel = "question";
+  selectedMonth = month;
 
   content.innerHTML = `
-    <h2>${month} ${year} Long Questions</h2>
+    <h2>${month} ${selectedYear} Long Questions</h2>
 
-    ${questionBox("Explain the importance of India’s foreign policy in 2024?")}
-    ${questionBox("Discuss India-Maldives relations in detail.")}
-    ${questionBox("Explain Artificial Intelligence impact on exams.")}
-    ${questionBox("Describe India’s economic growth after 2023.")}
+    ${questionBox("Explain India’s foreign policy developments.")}
+    ${questionBox("Discuss India-Maldives diplomatic relations.")}
+    ${questionBox("Explain impact of AI in competitive exams.")}
+    ${questionBox("Describe India’s economic reforms.")}
     ${questionBox("Explain Cyber Security challenges in India.")}
   `;
 }
@@ -62,21 +78,36 @@ function questionBox(q){
     <div class="qa-box">
       <div class="question">${q}</div>
       <div class="answer">
-        This is a demo answer for testing button functionality. 
-        You can replace this with real long answer content.
+        This is a demo answer to test the button functionality.
+        You can replace it with your real long answer content.
       </div>
     </div>
   `;
 }
 
-function goBack(){
-  showYears();
+
+// ------------------ BACK BUTTON LOGIC ------------------
+function handleBack(){
+
+  if(currentLevel === "question"){
+    showMonths(selectedYear);
+  }
+  else if(currentLevel === "month"){
+    showYears();
+  }
+  else{
+    window.location.href = "dashboard.html";
+  }
+
 }
 
+
+// INITIAL LOAD
 showYears();
 
 </script>
 
 <script src="darkmode.js"></script>
+
 </body>
 </html>
