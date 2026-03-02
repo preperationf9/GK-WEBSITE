@@ -1,21 +1,31 @@
 <!doctype html>
 <html>
 <head>
-  <title>GK & Current Affairs Hub</title>
+  <title>GK Preparation Hub</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="firebase.js"></script>
 </head>
-<body class="center">
-  <div class="card">
-    <h1>📘 GK & Current Affairs Hub</h1>
+<body>
+
+<header class="main-header">
+  <div class="brand-title">📘 GK Preparation Hub</div>
+  <div class="tagline">Smart Preparation for Serious Aspirants 🚀</div>
+</header>
+
+<div class="center">
+  <div class="section-card">
+    <h2>📘 GK & Current Affairs Hub</h2>
     <button class="primary-btn" onclick="login()">Login with Google</button>
   </div>
-  <script>
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) window.location.href = "dashboard.html";
-    });
-  </script>
+</div>
+
+<script>
+firebase.auth().onAuthStateChanged(user=>{
+  if(user) window.location.href="dashboard.html";
+});
+</script>
+
 </body>
 </html>

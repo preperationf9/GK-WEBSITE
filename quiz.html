@@ -1,32 +1,42 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Select Subject</title>
-    <link rel="stylesheet" href="style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
+<head>
+  <title>Quiz Section - GK Preparation Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+<body>
 
-    <header>🧠 Quiz Section</header>
-    <h2 class="center-text">Select Subject</h2>
+<!-- ✅ Main Branding Header -->
+<header class="main-header">
+  <div class="brand-title">📘 GK Preparation Hub</div>
+  <div class="tagline">Smart Preparation for Serious Aspirants 🚀</div>
+</header>
 
-    <div class="section-grid">
-      <div class="section-card" onclick="openSubject('current_affairs')">📰 Current Affairs</div>
-      <div class="section-card" onclick="openSubject('gk')">🌍 General Awareness</div>
-      <div class="section-card" onclick="openSubject('reasoning')">🧩 Reasoning</div>
-    </div>
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
 
-    <button class="back-btn" onclick="location.href = 'dashboard.html'">⬅ Back</button>
+<h1 class="page-title">🧠 Quiz Section</h1>
+<h2 class="center-text">Select Subject</h2>
 
-    <script>
-      function openSubject(subject) {
-        localStorage.setItem("quizSubject", subject);
-        location.href = "quiz_sets.html";
-      }
-    </script>
+<div class="section-grid">
+  <div class="section-card" onclick="openSubject('current_affairs')">📰 Current Affairs</div>
+  <div class="section-card" onclick="openSubject('gk')">🌍 General Awareness</div>
+  <div class="section-card" onclick="openSubject('reasoning')">🧩 Reasoning</div>
+</div>
 
-    <script src="darkmode.js"></script>
-  </body>
+<button class="back-btn" onclick="location.href = 'dashboard.html'">
+  ⬅ Back
+</button>
+
+<script>
+function openSubject(subject) {
+  localStorage.setItem("quizSubject", subject);
+  location.href = "quiz_sets.html";
+}
+</script>
+
+<script src="darkmode.js"></script>
+
+</body>
 </html>

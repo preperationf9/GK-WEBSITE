@@ -1,34 +1,42 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Objective Questions</title>
-    <link rel="stylesheet" href="style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <!-- 🌙 Dark Mode Button -->
-    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
+<head>
+  <title>Objective Questions - GK Preparation Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-    <header>📚 Objective Questions - Select Year</header>
+<body>
 
-    <div class="section-grid">
-      <div class="section-card" onclick="selectYear(2024)"> 🗓️2024</div>
-      <div class="section-card" onclick="selectYear(2025)"> 🗓️2025</div>
-      <div class="section-card" onclick="selectYear(2026)"> 🗓️2026</div>
-    </div>
+<!-- ✅ Main Branding Header (Same Everywhere) -->
+<header class="main-header">
+  <div class="brand-title">📘 GK Preparation Hub</div>
+  <div class="tagline">Smart Preparation for Serious Aspirants 🚀</div>
+</header>
 
-    <button class="back-btn" onclick="location.href = 'dashboard.html'">
-      ⬅ Back
-    </button>
+<!-- 🌙 Dark Mode Button -->
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
 
-    <script>
-      function selectYear(year) {
-        localStorage.setItem("objectiveYear", year);
-        location.href = "objective_year.html";
-      }
-    </script>
+<h1 class="page-title">📚 Objective Questions - Select Year</h1>
 
-    <!-- 🌙 Global Dark Mode Script -->
-    <script src="darkmode.js"></script>
-  </body>
+<div class="section-grid">
+  <div class="section-card" onclick="selectYear(2024)">🗓️ 2024</div>
+  <div class="section-card" onclick="selectYear(2025)">🗓️ 2025</div>
+  <div class="section-card" onclick="selectYear(2026)">🗓️ 2026</div>
+</div>
+
+<button class="back-btn" onclick="location.href = 'dashboard.html'">
+  ⬅ Back
+</button>
+
+<script>
+function selectYear(year) {
+  localStorage.setItem("objectiveYear", year);
+  location.href = "objective_year.html";
+}
+</script>
+
+<script src="darkmode.js"></script>
+
+</body>
 </html>

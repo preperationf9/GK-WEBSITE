@@ -1,21 +1,32 @@
 <!doctype html>
 <html>
 <head>
-  <title>IB Exam Preparation</title>
+  <title>IB Exam - GK Preparation Hub</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+<!-- ✅ Main Branding Header -->
+<header class="main-header">
+  <div class="brand-title">📘 GK Preparation Hub</div>
+  <div class="tagline">Smart Preparation for Serious Aspirants 🚀</div>
+</header>
 
 <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark</button>
 
-<header>🕵️ IB Exam Preparation</header>
+<h1 class="page-title">🕵️ IB Exam Preparation</h1>
 
+<!-- ✅ Main Section -->
 <div class="section-grid">
+
   <div class="section-card" onclick="openExam('ACIO')">ACIO</div>
   <div class="section-card" onclick="openExam('MTS')">MTS</div>
   <div class="section-card" onclick="openExam('Security Assistant')">Security Assistant</div>
+
 </div>
 
+<!-- Dynamic Content -->
 <div id="examContent" class="section-grid"></div>
 
 <button class="back-btn" onclick="goBack()">⬅ Back</button>
@@ -163,5 +174,6 @@ function goBack(){
 </script>
 
 <script src="darkmode.js"></script>
+
 </body>
 </html>

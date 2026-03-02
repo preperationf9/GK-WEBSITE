@@ -1,151 +1,51 @@
 <!doctype html>
 <html>
 <head>
-  <title>SSC Exam Preparation</title>
+  <title>SSC Exam - GK Preparation Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#eef1f5;
-    }
-
-    header{
-      background:#1f6feb;
-      color:white;
-      padding:18px;
-      text-align:center;
-      font-size:20px;
-      font-weight:bold;
-    }
-
-    .section-grid{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:20px;
-      padding:50px 20px;
-    }
-
-    .exam-card{
-      width:550px;          /* 👈 IB जैसा medium size */
-      padding:18px 0;       /* 👈 Slim height */
-      text-align:center;
-      border-radius:16px;
-      background:linear-gradient(#e9ecef,#e9ecef) padding-box,
-                 linear-gradient(90deg,red,orange,yellow,green,blue,indigo,violet) border-box;
-      border:3px solid transparent;
-      box-shadow:0 8px 20px rgba(0,0,0,0.1);
-      transition:0.3s ease;
-    }
-
-    .exam-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 12px 28px rgba(0,0,0,0.15);
-    }
-
-    .exam-title{
-      font-size:18px;
-      font-weight:600;
-      margin-bottom:10px;
-    }
-
-    .open-btn{
-      background:#1f6feb;
-      color:white;
-      border:none;
-      padding:7px 18px;
-      border-radius:6px;
-      cursor:pointer;
-      font-size:13px;
-      transition:0.3s;
-    }
-
-    .open-btn:hover{
-      background:#1558c0;
-    }
-
-    .qa-box{
-      width:550px;
-      background:white;
-      padding:15px;
-      border-radius:10px;
-      box-shadow:0 5px 15px rgba(0,0,0,0.1);
-      margin-bottom:15px;
-    }
-
-    .question{
-      font-weight:bold;
-      margin-bottom:6px;
-    }
-
-    .answer{
-      color:#444;
-      font-size:14px;
-    }
-
-    .back-btn{
-      background:#ff7043;
-      color:white;
-      border:none;
-      padding:8px 16px;
-      border-radius:6px;
-      cursor:pointer;
-      margin-bottom:20px;
-    }
-
-    .back-btn:hover{
-      background:#e65c2f;
-    }
-
-    @media(max-width:600px){
-      .exam-card,
-      .qa-box{
-        width:90%;
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-📘 SSC Exam Preparation
+<!-- ✅ Main Branding Header (Same as IB) -->
+<header class="main-header">
+  <div class="brand-title">📘 GK Preparation Hub</div>
+  <div class="tagline">Smart Preparation for Serious Aspirants 🚀</div>
 </header>
+
+<h1 class="page-title">📘 SSC Exam Preparation</h1>
 
 <div id="examContent" class="section-grid"></div>
 
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
 <script>
 
+let level = "home";
+
 function loadHome(){
+  level = "home";
+
   document.getElementById("examContent").innerHTML = `
-  
-    <div class="exam-card">
-      <div class="exam-title">SSC CGL</div>
-      <button class="open-btn" onclick="openContent('cgl')">Open</button>
-    </div>
+    ${card("cgl","SSC CGL")}
+    ${card("chsl","SSC CHSL")}
+    ${card("gd","SSC GD")}
+    ${card("cpo","SSC CPO")}
+  `;
+}
 
-    <div class="exam-card">
-      <div class="exam-title">SSC CHSL</div>
-      <button class="open-btn" onclick="openContent('chsl')">Open</button>
+function card(type,title){
+  return `
+    <div class="section-card">
+      <h3>${title}</h3>
+      <button class="glow-btn" onclick="openContent('${type}')">Open</button>
     </div>
-
-    <div class="exam-card">
-      <div class="exam-title">SSC GD</div>
-      <button class="open-btn" onclick="openContent('gd')">Open</button>
-    </div>
-
-    <div class="exam-card">
-      <div class="exam-title">SSC CPO</div>
-      <button class="open-btn" onclick="openContent('cpo')">Open</button>
-    </div>
-
   `;
 }
 
 function openContent(type){
+  level = "content";
 
   let questions = [];
 
@@ -186,7 +86,7 @@ function openContent(type){
   }
 
   let contentHTML = `
-    <button class="back-btn" onclick="loadHome()">← Back</button>
+    <h2>Question Bank</h2>
   `;
 
   questions.forEach(q=>{
@@ -201,9 +101,19 @@ function openContent(type){
   document.getElementById("examContent").innerHTML = contentHTML;
 }
 
+function goBack(){
+  if(level === "content"){
+    loadHome();
+  } else {
+    window.location.href = "exams.html";
+  }
+}
+
 loadHome();
 
 </script>
+
+<script src="darkmode.js"></script>
 
 </body>
 </html>
